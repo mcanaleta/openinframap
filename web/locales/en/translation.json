@@ -125,6 +125,7 @@
     "substation-type": "Substation type",
     "reference": "Reference",
     "circuits": "Circuits",
+    "circuits-unavailable": "Circuit details are temporarily unavailable.",
     "type": "Type",
     "website": "Website",
     "view-openstreetmap": "View on OpenStreetMap",
@@ -206,6 +207,15 @@
   "warnings": {
     "webgl": "<p>Your browser may have performance or functionality issues with Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> with hardware acceleration is required for this site to perform well.</p><p>If your browser supports WebGL, you may need to disable browser fingerprinting protection for this site.</p>"
   },
+  "filters": {
+    "minimum-voltage": "Minimum voltage"
+  },
+  "quick-actions": {
+    "backgrounds": "Backgrounds",
+    "voltage": "Minimum voltage",
+    "minimum-voltage": "Minimum {{voltage}} kV",
+    "clear-filters": "Clear filters"
+  },
   "layers": {
     "background": "Background",
     "heatmaps": "Heatmaps",
@@ -213,6 +223,10 @@
     "infrastructure": "Infrastructure",
     "validation": "Validation",
     "nighttime-lights": "Nighttime Lights",
+    "satellite-imagery": "Satellite (Sentinel-2)",
+    "pnoa-imagery": "Aerial imagery (PNOA Spain)",
+    "icgc-imagery": "Aerial imagery (ICGC Catalunya)",
+    "esri-imagery": "Satellite imagery (Esri World Imagery)",
     "power": "Power",
     "solar-generation": "Solar Generation",
     "telecoms": "Telecoms",

@@ -71,6 +71,43 @@ const style: StyleSpecification = {
       attribution:
         '<a href="https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/products/VNP46A4/">NASA Black Marble 2024</a>'
     },
+    satellite: {
+      type: 'raster',
+      tiles: [
+        'https://tiles.maps.eox.at/wmts?layer=s2cloudless-2025_3857&style=default&tilematrixset=GoogleMapsCompatible&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/jpeg&TileMatrix={z}&TileCol={x}&TileRow={y}'
+      ],
+      tileSize: 256,
+      maxzoom: 14,
+      attribution:
+        '<a href="https://cloudless.eox.at">EOxCloudless</a> by EOX IT Services GmbH (Contains modified Copernicus Sentinel data 2025)'
+    },
+    pnoa: {
+      type: 'raster',
+      tiles: [
+        'https://www.ign.es/wmts/pnoa-ma?layer=OI.OrthoimageCoverage&style=default&tilematrixset=GoogleMapsCompatible&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image/jpeg&TileMatrix={z}&TileCol={x}&TileRow={y}'
+      ],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution: 'Ortofotos PNOA © <a href="https://www.ign.es">Instituto Geográfico Nacional de España</a>'
+    },
+    icgc: {
+      type: 'raster',
+      tiles: ['https://geoserveis.icgc.cat/servei/catalunya/mapa-base/wmts/orto/MON3857NW/{z}/{x}/{y}.png'],
+      tileSize: 256,
+      maxzoom: 20,
+      attribution:
+        'Ortofoto de Catalunya © <a href="https://www.icgc.cat">Institut Cartogràfic i Geològic de Catalunya</a>'
+    },
+    esri: {
+      type: 'raster',
+      tiles: [
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+      ],
+      tileSize: 256,
+      maxzoom: 23,
+      attribution:
+        'Source: <a href="https://www.esri.com">Esri</a>, Vantor, Earthstar Geographics, and the GIS User Community'
+    },
     power: {
       type: 'vector',
       tiles: ['https://openinframap.org/map/power/{z}/{x}/{y}.pbf'],

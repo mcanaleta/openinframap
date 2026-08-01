@@ -618,6 +618,54 @@ const layers: LayerSpecificationWithZIndex[] = [
     }
   },
   {
+    id: 'satellite_background',
+    type: 'background',
+    paint: {
+      'background-color': 'rgb(0,0,0)'
+    }
+  },
+  {
+    id: 'satellite_imagery',
+    type: 'raster',
+    source: 'satellite'
+  },
+  {
+    id: 'pnoa_background',
+    type: 'background',
+    paint: {
+      'background-color': 'rgb(0,0,0)'
+    }
+  },
+  {
+    id: 'pnoa_imagery',
+    type: 'raster',
+    source: 'pnoa'
+  },
+  {
+    id: 'icgc_background',
+    type: 'background',
+    paint: {
+      'background-color': 'rgb(0,0,0)'
+    }
+  },
+  {
+    id: 'icgc_imagery',
+    type: 'raster',
+    source: 'icgc'
+  },
+  {
+    id: 'esri_background',
+    type: 'background',
+    paint: {
+      'background-color': 'rgb(0,0,0)'
+    }
+  },
+  {
+    id: 'esri_imagery',
+    type: 'raster',
+    source: 'esri'
+  },
+  {
     id: 'black_marble_background',
     type: 'background',
     paint: {

@@ -136,6 +136,7 @@
         "substation-type": "Tipo de subestación",
         "reference": "Referencia",
         "circuits": "Circuitos",
+        "circuits-unavailable": "Los detalles de los circuitos no están disponibles temporalmente.",
         "type": "Tipo",
         "output": "Potencia",
         "source": "Fuente",
@@ -200,6 +201,10 @@
         "title": "Capas",
         "telecoms": "Telecomunicaciones",
         "nighttime-lights": "Luces nocturnas",
+        "satellite-imagery": "Satélite (Sentinel-2)",
+        "pnoa-imagery": "Ortofoto (PNOA España)",
+        "icgc-imagery": "Ortofoto (ICGC Catalunya)",
+        "esri-imagery": "Satélite (Esri World Imagery)",
         "background": "Fondo",
         "heatmaps": "Mapas de calor",
         "overlays": "Sobrecapas",
@@ -224,6 +229,15 @@
     "construction": "en construcción",
     "warnings": {
         "webgl": "<p>Su navegador puede tener problemas de rendimiento o funcionalidad con Open Infrastructure Map.</p><p><a href=\"http://webglreport.com\">WebGL</a> con aceleración de hardware es necesario para que este sitio funcione bien.</p><p>Si su navegador es compatible con WebGL, es posible que tenga que desactivar la protección de rastreo de huellas digitales (fingerprinting) del navegador para este sitio.</p>"
+    },
+    "filters": {
+        "minimum-voltage": "Tensión mínima"
+    },
+    "quick-actions": {
+        "backgrounds": "Fondos",
+        "voltage": "Tensión mínima",
+        "minimum-voltage": "Mínimo {{voltage}} kV",
+        "clear-filters": "Eliminar filtros"
     },
     "disused": "en desuso",
     "coordinates": "Coordenadas",

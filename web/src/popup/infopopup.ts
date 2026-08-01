@@ -325,7 +325,7 @@ class InfoPopup {
     return el('span.voltages', text)
   }
 
-  async popupHtml(feature: MapGeoJSONFeature) {
+  popupHtml(feature: MapGeoJSONFeature) {
     const layer_id = feature.layer.id
 
     const attrs_table = el('table', { class: 'item_info' })
@@ -369,13 +369,17 @@ class InfoPopup {
     mount(content, attrs_table)
 
     if (layer_id.startsWith('power_substation') || layer_id.startsWith('power_converter')) {
-      const circuits_container = await this.fetch_substation_circuits(feature.properties['osm_id'])
-      circuits_container.forEach((e) => mount(content, e))
+      const circuits_container = el('div')
+      mount(content, circuits_container)
+      void this.loadCircuits(circuits_container, () =>
+        this.fetch_substation_circuits(feature.properties['osm_id'])
+      )
     }
 
     if (layer_id.startsWith('power_line')) {
-      const circuits_container = await this.fetch_line_circuits(feature.properties['osm_id'])
-      circuits_container.forEach((e) => mount(content, e))
+      const circuits_container = el('div')
+      mount(content, circuits_container)
+      void this.loadCircuits(circuits_container, () => this.fetch_line_circuits(feature.properties['osm_id']))
     }
 
     const footer = el('div.oim-info-footer')
@@ -394,7 +398,7 @@ class InfoPopup {
     return content
   }
 
-  async popup(feature: MapGeoJSONFeature, location: LngLat) {
+  popup(feature: MapGeoJSONFeature, location: LngLat) {
     if (this.popup_obj && this.popup_obj.isOpen()) {
       this.popup_obj.remove()
     }
@@ -405,10 +409,20 @@ class InfoPopup {
 
     this.popup_obj = new maplibregl.Popup()
       .setLngLat(location)
-      .setDOMContent(await this.popupHtml(feature))
+      .setDOMContent(this.popupHtml(feature))
       .addTo(this._map)
       .addClassName('oim-popup')
       .addClassName('oim-popup-info')
+  }
+
+  async loadCircuits(container: HTMLElement, fetchCircuits: () => Promise<HTMLElement[]>) {
+    try {
+      const circuits = await fetchCircuits()
+      circuits.forEach((circuit) => mount(container, circuit))
+    } catch (error) {
+      mount(container, el('p.circuits-unavailable', t('info.circuits-unavailable')))
+      console.warn('Unable to load circuit details', error)
+    }
   }
 
   circuits_table(circuits: Array<object>) {
@@ -442,7 +456,10 @@ class InfoPopup {
   }
 
   async fetch_substation_circuits(id: string) {
-    const response = await this.api.fetch(`/api/substation/${id}`)
+    // Imposm exposes relation geometries with negative IDs in vector tiles,
+    // while relation member references in the circuit API are positive.
+    const memberId = Math.abs(Number(id))
+    const response = await this.api.fetch(`/api/substation/${memberId}`)
     return this.circuits_section(response)
   }
 

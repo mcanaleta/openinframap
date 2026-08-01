@@ -1,0 +1,32 @@
+.voltage-filter-control {
+  padding: 0;
+}
+
+.voltage-filter-control > label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.voltage-filter-input {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.voltage-filter-input input {
+  min-width: 0;
+  flex: 1;
+  width: auto;
+  padding: 0.2rem 0.3rem;
+  border: 1px solid var(--oim-grey);
+  border-radius: var(--oim-radius-small);
+  background: white;
+  font: inherit;
+}
+
+.voltage-filter-input input:focus {
+  border-color: var(--oim-dark-grey);
+  outline: 1px solid var(--oim-dark-grey);
+}

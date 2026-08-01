@@ -23,6 +23,21 @@ export default defineConfig({
     fs: {
       // Allow serving files from one level up to the project root
       allow: ['..']
+    },
+    proxy: {
+      // Keep local frontend development same-origin while using the production API.
+      '/api': {
+        target: 'https://openinframap.org',
+        changeOrigin: true
+      },
+      '/wikidata': {
+        target: 'https://openinframap.org',
+        changeOrigin: true
+      },
+      '/search': {
+        target: 'https://openinframap.org',
+        changeOrigin: true
+      }
     }
   },
 

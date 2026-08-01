@@ -23,7 +23,7 @@ type OIMResponse = {
 }
 
 export default class OIMSearchProvider implements ISearchProvider {
-  url = 'https://openinframap.org/search/typeahead'
+  url = '/search/typeahead'
   baseScore: number = 0.9
   language: string
   regionNames: Intl.DisplayNames

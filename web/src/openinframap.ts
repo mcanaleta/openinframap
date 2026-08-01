@@ -17,6 +17,8 @@ import { SymbolLoader } from './symbol-loader.ts'
 import { ClickRouter } from './click-router.js'
 import { CircuitInspector } from './circuit/circuitinspector.ts'
 import { OpenInfraMapAPI } from './api.ts'
+import VoltageFilterControl from './voltage-filter-control.ts'
+import QuickActionsControl from './quick-actions-control.ts'
 
 export default class OpenInfraMap {
   map?: maplibregl.Map
@@ -58,6 +60,10 @@ export default class OpenInfraMap {
       [
         new LayerGroup(t('layers.background'), [
           new Layer('A', t('openstreetmap'), 'osm_', 'background', true),
+          new Layer('C', t('layers.satellite-imagery'), 'satellite_', 'background', false),
+          new Layer('F', t('layers.pnoa-imagery'), 'pnoa_', 'background', false),
+          new Layer('G', t('layers.icgc-imagery'), 'icgc_', 'background', false),
+          new Layer('H', t('layers.esri-imagery'), 'esri_', 'background', false),
           new Layer('N', t('layers.nighttime-lights'), 'black_marble', 'background', false)
         ]),
         new LayerGroup(t('layers.overlays'), [
@@ -81,11 +87,13 @@ export default class OpenInfraMap {
       t('layers.title', 'Layers')
     )
     const url_hash = new URLHash(layer_switcher)
+    const voltage_filter = new VoltageFilterControl(url_hash)
+    const quick_actions = new QuickActionsControl(layer_switcher, voltage_filter)
     const map_style = getStyle()
 
     layer_switcher.setInitialVisibility(map_style)
 
-    const api = new OpenInfraMapAPI('https://openinframap.org')
+    const api = new OpenInfraMapAPI('')
 
     const map = new maplibregl.Map(
       url_hash.init({
@@ -120,6 +128,7 @@ export default class OpenInfraMap {
 
     map.addControl(new KeyControl(), 'top-right')
     map.addControl(layer_switcher, 'top-right')
+    map.addControl(quick_actions, 'top-right')
     map.addControl(new EditButton(), 'bottom-right')
     map.addControl(new OIMSearch(), 'top-left')
     new InfoPopup({
