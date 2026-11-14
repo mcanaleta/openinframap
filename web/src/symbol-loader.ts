@@ -1,33 +1,29 @@
-import { Map, StyleImageMetadata, MapStyleImageMissingEvent } from 'maplibre-gl'
+import { Map, StyleImageMetadata } from 'maplibre-gl'
 import { manifest } from 'virtual:render-svg'
 
 export class SymbolLoader {
   icon_ratio: number
   icons: Record<string, string>
-  loadedIcons: Set<string>
 
   constructor(private map: Map) {
     this.icon_ratio = Math.min(Math.round(window.devicePixelRatio), 2)
     this.icons = manifest[this.icon_ratio.toString()]
-    this.loadedIcons = new Set<string>()
-    this.map.on('styleimagemissing', this.styleImageMissing.bind(this))
+    this.map.setMissingStyleImageResolver((id) => this.loadIcon(id))
   }
 
-  async styleImageMissing(e: MapStyleImageMissingEvent) {
-    const image_url = this.icons[e.id]
+  async loadIcon(id: string) {
+    const image_url = this.icons[id]
     const metadata: StyleImageMetadata = {
       pixelRatio: this.icon_ratio,
       sdf: false
     }
 
     if (!image_url) {
-      console.error(`Icon not found: ${e.id}`)
+      console.error(`Icon not found: ${id}`)
       return
     }
 
     const image = await this.map.loadImage(image_url)
-    if (this.loadedIcons.has(e.id)) return
-    this.loadedIcons.add(e.id)
-    this.map.addImage(e.id, image.data, metadata)
+    this.map.addImage(id, image.data, metadata)
   }
 }
