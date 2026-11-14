@@ -1,4 +1,5 @@
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
 import { t } from 'i18next'
 import { mount } from 'redom'
 
@@ -25,9 +26,7 @@ export default class OpenInfraMap {
     if (window.WebGLRenderingContext) {
       const canvas = document.createElement('canvas')
       try {
-        const context =
-          canvas.getContext('webgl2', { failIfMajorPerformanceCaveat: true }) ||
-          canvas.getContext('webgl', { failIfMajorPerformanceCaveat: true })
+        const context = canvas.getContext('webgl2', { failIfMajorPerformanceCaveat: true })
         if (context && typeof context.getParameter == 'function') {
           return true
         }
@@ -47,10 +46,7 @@ export default class OpenInfraMap {
       mount(document.body, infobox)
     }
 
-    maplibregl.setRTLTextPlugin(
-      'https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js',
-      true // Lazy load the plugin
-    )
+    maplibregl.setWorkerUrl(workerUrl)
   }
 
   init() {
