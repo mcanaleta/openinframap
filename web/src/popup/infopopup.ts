@@ -1,7 +1,8 @@
 import './infopopup.css'
 
 import i18next, { t } from 'i18next'
-import maplibregl, { LngLat, MapGeoJSONFeature, Popup } from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import { LngLat, MapGeoJSONFeature, Popup } from 'maplibre-gl'
 import { titleCase } from 'title-case'
 import { local_name_tags, formatVoltage, formatFrequency, formatPower } from '../l10n.ts'
 import friendlyNames from '../friendlynames.ts'
